@@ -7,5 +7,5 @@ ADD https://bootstrapmade.com/content/templatefiles/Ninestars/Ninestars.zip .
 RUN unzip Ninestars.zip
 RUN mv Ninestars/* .
 RUN rm -rf Ninestars Ninestars.zip
-EXPOSE 80 22
+EXPOSE 80 
 CMD ["nginx", "-g", "daemon off;"]
