@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: g201210017
+spec:
+   replicas: 2
+   selector:     
+    matchLabels:
+     app: g201210017
+   template:
+      metadata:
+        labels:
+          app: g201210017
+      spec:
+       containers:
+        - name: g201210017
+          image: g201210017/devops-proje
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
