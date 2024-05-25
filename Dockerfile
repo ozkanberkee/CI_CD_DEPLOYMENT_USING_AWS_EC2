@@ -1,16 +1,20 @@
 FROM centos
-RUN cd /etc/yum.repos.d/
+
+# Update repositories
+RUN yum update -y && yum install -y java httpd zip unzip
+
+# Enable access to vault.centos.org
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-RUN yum -y install java
-CMD /bin/bash
-RUN yum install -y httpd
-RUN yum install -y zip
-RUN yum install -y unzip
-ADD https://github.com/arp242/hello-css/archive/refs/heads/master.zip /var/www/html/
-WORKDIR /var/www/html/
-RUN sh -c 'unzip -q "*.zip"'
-RUN cp -rvf master/* .
-RUN rm -rf master master.zip
+
+# Download and extract the ZIP file
+ADD https://github.com/arp242/hello-css/archive/refs/heads/master.zip /tmp/
+WORKDIR /tmp
+RUN unzip -q master.zip -d /var/www/html/
+
+# Clean up
+RUN rm -f master.zip
+
+# Start Apache HTTP server
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
