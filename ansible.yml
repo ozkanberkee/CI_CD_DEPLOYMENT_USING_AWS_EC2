@@ -1,11 +1,21 @@
 - hosts: all
   become: true
-  tasks: 
-    - name: delete old deployment
-      command: kubectl delete -f /home/ubuntu/Deployment.yml
-    - name: delete old service
-      command: kubectl delete -f /home/ubuntu/Service.yml
-    - name: create new deployment
-      command: kubectl apply -f /home/ubuntu/Deployment.yml
-    - name: create new service
-      command: kubectl apply -f /home/ubuntu/Service.yml
+  tasks:
+    - name: Delete old deployment (using Minikube API)
+      kubectl:
+        state: absent
+        server: https://192.168.49.2:8443  
+        kubeconfig: /home/ubuntu/.kube/config  
+    - name: Delete old service
+      kubectl:
+        state: absent
+        server: https://192.168.49.2:8443
+        kubeconfig: /home/ubuntu/.kube/config  
+    - name: Create new deployment
+      kubectl:
+        apply:
+          - /home/ubuntu/Deployment.yml
+    - name: Create new service
+      kubectl:
+        apply:
+          - /home/ubuntu/Service.yml
