@@ -9,10 +9,10 @@
       command: kubectl delete service --all --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
       
 
-    - name: Create new deployment
-      command: kubectl apply -f /home/ubuntu/Deployment.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
+    #- name: Create new deployment
+     # command: kubectl apply -f /home/ubuntu/Deployment.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
       
 
-    - name: Create new service
-      command: kubectl apply -f /home/ubuntu/Service.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
+    #- name: Create new service
+     # command: kubectl apply -f /home/ubuntu/Service.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
       
