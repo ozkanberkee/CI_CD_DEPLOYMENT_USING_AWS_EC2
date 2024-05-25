@@ -1,20 +1,17 @@
-FROM centos
+# Resmi Node.js görüntüsünü kullan
+FROM node:alpine
 
-# Update repositories
-RUN yum install -y java httpd zip unzip
+# Çalışma dizinini /uygulama olarak ayarla
+WORKDIR /uygulama
 
-# Enable access to vault.centos.org
-RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+# Paket.json dosyasını kopyala
+COPY package.json .
 
-# Download and extract the ZIP file
-ADD https://github.com/arp242/hello-css/archive/refs/heads/master.zip /tmp/
-WORKDIR /tmp
-RUN unzip -q master.zip -d /var/www/html/
+# Bağımlılıkları yükle
+RUN npm install
 
-# Clean up
-RUN rm -f master.zip
+# Uygulama kaynak dosyalarını kopyala
+COPY . .
 
-# Start Apache HTTP server
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-EXPOSE 80
+# Uygulamayı çalıştır
+CMD ["node", "index.js"]
