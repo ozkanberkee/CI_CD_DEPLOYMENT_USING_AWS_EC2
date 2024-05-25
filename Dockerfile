@@ -1,7 +1,7 @@
 FROM centos
 
 # Update repositories
-RUN yum update -y && yum install -y java httpd zip unzip
+RUN yum install -y java httpd zip unzip
 
 # Enable access to vault.centos.org
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
