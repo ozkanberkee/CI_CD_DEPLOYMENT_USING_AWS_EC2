@@ -1,16 +1,16 @@
-FROM centos
-RUN cd /etc/yum.repos.d/
-RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-RUN yum -y install java
-CMD /bin/bash
-RUN yum install -y httpd
-RUN yum install -y zip
-RUN yum install -y unzip
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page296/listrace.zip /var/www/html/
-WORKDIR /var/www/html/
-RUN sh -c 'unzip -q "*.zip"'
-RUN cp -rvf photogenic/* .
-RUN rm -rf photogenic photogenic.zip
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-EXPOSE 80
+FROM node:latest
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN wget -O /tmp/project.zip https://github.com/berkaltiok/food-delivery/archive/refs/heads/master.zip \
+    && unzip /tmp/project.zip -d /usr/src/app \
+    && rm /tmp/project.zip
+
+WORKDIR /usr/src/app/food-delivery-master
+
+RUN npm install
+
+CMD ["npm", "run", "start"]
