@@ -4,14 +4,8 @@ FROM node:alpine
 # Çalışma dizinini /uygulama olarak ayarla
 WORKDIR /uygulama
 
-# Paket.json dosyasını kopyala
-COPY package.json .
-
-# Bağımlılıkları yükle
-RUN npm install
-
-# Uygulama kaynak dosyalarını kopyala
-COPY . .
+# Uygulama kodunu kopyala
+COPY index.js .
 
 # Uygulamayı çalıştır
 CMD ["node", "index.js"]
