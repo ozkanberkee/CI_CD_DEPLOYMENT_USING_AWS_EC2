@@ -1,18 +1,16 @@
 FROM centos
-
-# Gerekli paketleri yükleyin
-RUN yum install -y unzip httpd
-
-# Dosyayı kopyalayın
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum -y install java
+CMD /bin/bash
+RUN yum install -y httpd
+RUN yum install -y zip
+RUN yum install -y unzip
 COPY spering.zip /var/www/html/
-
-# Çalışma dizinini ayarlayın ve dosyayı açın
 WORKDIR /var/www/html/
 RUN unzip -q spering.zip && \
     rm -f spering.zip
-
-# Apache HTTP sunucusunu başlatın
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 
-# Port 80'i dışa açın
 EXPOSE 80
