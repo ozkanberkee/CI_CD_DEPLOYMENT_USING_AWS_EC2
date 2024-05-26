@@ -1,5 +1,4 @@
 kind: Service                             
-kind: Service
 apiVersion: v1
 metadata:
   name: g201210017
@@ -10,11 +9,6 @@ spec:
     - port: 8080                               
       targetPort: 80                    
       nodePort: 31200
-    - port: 80
-      targetPort: 80
-      nodePort: 80
   selector:
     app: g201210017                    
-  type: LoadBalancer                   
-    app: g201210017
   type: LoadBalancer
