@@ -1,11 +1,23 @@
+kind: Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+   name: g201210017
   name: devops-proje-deployment
 spec:
+   replicas: 2
+   selector:     
   replicas: 2
   selector:
     matchLabels:
+     app: g201210017
+   template:
+      metadata:
+        labels:
+          app: g201210017
+      spec:
+       containers:
+        - name: g201210017
       app: devops-proje
   template:
     metadata:
@@ -15,5 +27,7 @@ spec:
       containers:
         - name: devops-proje-container
           image: g201210017/devops-proje
+          imagePullPolicy: Always
           ports:
-            - containerPort: 80
+          - containerPort: 80
+            - containerPort: 31200
