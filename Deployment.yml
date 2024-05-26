@@ -16,4 +16,4 @@ spec:
         - name: devops-proje-container
           image: g201210017/devops-proje
           ports:
-            - containerPort: 31200
+            - containerPort: 80
