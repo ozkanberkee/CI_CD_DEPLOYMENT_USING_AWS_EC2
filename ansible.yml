@@ -1,14 +1,16 @@
-- hosts: all
-  become: true
-  tasks: 
-    # - name: delete old deployment
-     #  shell: kubectl delete -f /home/ubuntu/Deployment.yml --server https://192.168.49.2:8443
+---
+- name: Minikube'de Deployment ve Servis Oluşturma
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: "Mevcut Deployment'ı sil"
+      command: kubectl delete -f /home/ubuntu/Deployment.yml --ignore-not-found=true
 
-     #- name: delete old service
-       #shell: kubectl delete -f /home/ubuntu/Service.yml --server https://192.168.49.2:8443 
+    - name: "Mevcut Servis'i sil"
+      command: kubectl delete -f /home/ubuntu/Service.yml --ignore-not-found=true
 
-     - name: create new deployment
-       shell: kubectl apply -f /home/ubuntu/Deployment.yml --server https://192.168.49.2:8443
+    - name: "Deployment dosyasını uygula"
+      command: kubectl apply -f /home/ubuntu/Deployment.yml --validate=false
 
-     - name: create new service
-       shell: kubectl apply -f /home/ubuntu/Service.yml --server https://192.168.49.2:8443
+    - name: "Servis dosyasını uygula"
+      command: kubectl apply -f /home/ubuntu/Service.yml --validate=false
