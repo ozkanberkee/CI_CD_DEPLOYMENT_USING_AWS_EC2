@@ -1,10 +1,10 @@
 - hosts: all
   become: true
   tasks: 
-     - name: delete old deployment
-       shell: kubectl delete -f /home/ubuntu/Deployment.yml --server https://192.168.49.2:8443
+    # - name: delete old deployment
+     #  shell: kubectl delete -f /home/ubuntu/Deployment.yml --server https://192.168.49.2:8443
 
-     - name: delete old service
+     #- name: delete old service
        shell: kubectl delete -f /home/ubuntu/Service.yml 
 
      - name: create new deployment
