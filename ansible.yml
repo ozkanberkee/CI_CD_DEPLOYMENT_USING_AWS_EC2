@@ -2,10 +2,10 @@
   become: true
   tasks: 
     - name: delete old deployment
-      command: kubectl delete -f /home/ubuntu/Deployment.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
+      command: kubectl delete -f Deployment.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
     - name: delete old service
-      command: kubectl delete -f /home/ubuntu/Service.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
+      command: kubectl delete -f Service.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
     - name: create new deployment
-      command: kubectl apply -f /home/ubuntu/Deployment.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
+      command: kubectl apply -f Deployment.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
     - name: create new service
-      command: kubectl apply -f /home/ubuntu/Service.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
+      command: kubectl apply -f Service.yml --kubeconfig=/home/ubuntu/.kube/config --server=https://192.168.49.2:8443
