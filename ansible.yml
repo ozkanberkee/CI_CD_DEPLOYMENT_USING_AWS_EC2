@@ -4,13 +4,13 @@
   gather_facts: no
   tasks:
     - name: "Mevcut Deployment'ı sil"
-      command: kubectl delete -f /home/ubuntu/Deployment.yml --ignore-not-found=true
+      command: microk8s.kubectl delete -f /home/ubuntu/Deployment.yml --ignore-not-found=true
 
     - name: "Mevcut Servis'i sil"
-      command: kubectl delete -f /home/ubuntu/Service.yml --ignore-not-found=true
+      command: microk8s.kubectl delete -f /home/ubuntu/Service.yml --ignore-not-found=true
 
     - name: "Deployment dosyasını uygula"
-      command: kubectl apply -f /home/ubuntu/Deployment.yml --validate=false
+      command: microk8s.kubectl apply -f /home/ubuntu/Deployment.yml --validate=false
 
     - name: "Servis dosyasını uygula"
-      command: kubectl apply -f /home/ubuntu/Service.yml --validate=false
+      command: microk8s.kubectl apply -f /home/ubuntu/Service.yml --validate=false
