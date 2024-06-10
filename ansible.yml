@@ -9,8 +9,8 @@
     - name: "Mevcut Servis'i sil"
       command: microk8s.kubectl delete -f /home/ubuntu/Service.yml --ignore-not-found=true
 
-    #- name: "Deployment dosyasını uygula"
-      #command: microk8s.kubectl apply -f /home/ubuntu/Deployment.yml --validate=false
+    - name: "Deployment dosyasını uygula"
+      command: microk8s.kubectl apply -f /home/ubuntu/Deployment.yml --validate=false
 
-    #- name: "Servis dosyasını uygula"
-      #command: microk8s.kubectl apply -f /home/ubuntu/Service.yml --validate=false
+    - name: "Servis dosyasını uygula"
+      command: microk8s.kubectl apply -f /home/ubuntu/Service.yml --validate=false
